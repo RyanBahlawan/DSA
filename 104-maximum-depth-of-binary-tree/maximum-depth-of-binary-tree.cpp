@@ -12,29 +12,27 @@
 class Solution {
 public:
     int maxDepth(TreeNode* root) {
-        //Iterative BFS
+        //Iterative DFS
         if(root == NULL){
             return 0;
         }
 
-        queue<TreeNode*> q;
-        q.push(root);
-        int level = 0;
+        stack<pair<TreeNode*, int>> s;
+        s.push({root, 1});
+        int res = 1;
 
-        while(!q.empty()){
-            int size = q.size();
-            for(int i = 0; i<size; i++){
-                TreeNode* node = q.front();
-                q.pop();
-                if(node->left!=NULL){
-                    q.push(node->left);
-                }
-                if(node->right!=NULL){
-                    q.push(node->right);
-                }
+        while(!s.empty()){
+            pair<TreeNode*, int> current = s.top();
+            s.pop();
+            TreeNode* node = current.first;
+            int depth = current.second;
+
+            if(node){
+                res = max(res, depth);
+                s.push({node->left, depth+1});
+                s.push({node->right, depth+1});
             }
-            level++;
         }
-        return level;
+        return res;
     }
 };
