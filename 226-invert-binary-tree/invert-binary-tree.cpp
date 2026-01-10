@@ -12,22 +12,22 @@
 class Solution {
 public:
     TreeNode* invertTree(TreeNode* root) {
-        //iterative DFS
+        //iterative BFS
         if(root==NULL){
             return NULL;
         }
-        stack<TreeNode*> s;
-        s.push(root);
+        queue<TreeNode*> q;
+        q.push(root);
 
-        while(!s.empty()){
-            TreeNode* node = s.top();
-            s.pop();
+        while(!q.empty()){
+            TreeNode* node = q.front();
+            q.pop();
             swap(node->left, node->right);
             if(node->left){
-                s.push(node->left);
+                q.push(node->left);
             }
             if(node->right){
-                s.push(node->right);
+                q.push(node->right);
             }
         }
         return root;
