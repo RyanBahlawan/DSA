@@ -12,15 +12,24 @@
 class Solution {
 public:
     TreeNode* invertTree(TreeNode* root) {
+        //iterative DFS
         if(root==NULL){
             return NULL;
         }
+        stack<TreeNode*> s;
+        s.push(root);
 
-        TreeNode* temp = root->right;
-        root->right = root->left;
-        root->left = temp;
-        invertTree(root->left);
-        invertTree(root->right);
+        while(!s.empty()){
+            TreeNode* node = s.top();
+            s.pop();
+            swap(node->left, node->right);
+            if(node->left){
+                s.push(node->left);
+            }
+            if(node->right){
+                s.push(node->right);
+            }
+        }
         return root;
     }
 };
