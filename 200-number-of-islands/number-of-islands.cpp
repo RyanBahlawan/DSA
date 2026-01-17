@@ -1,4 +1,5 @@
 class Solution {
+    const vector<pair<int, int>>directions = {{-1,0}, {0,-1}, {1,0}, {0,1}};
 public:
     int numIslands(vector<vector<char>>& grid) {
         int rows = grid.size();
@@ -22,7 +23,6 @@ public:
     }
 
     void bfs(vector<vector<char>>& grid, int r, int c, int rows, int cols){
-        vector<pair<int, int>>directions = {{-1,0}, {0,-1}, {1,0}, {0,1}};
         queue<pair<int, int>> q;
         q.push({r, c});
 
