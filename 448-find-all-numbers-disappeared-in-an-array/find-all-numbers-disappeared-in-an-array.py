@@ -1,10 +1,13 @@
 class Solution:
     def findDisappearedNumbers(self, nums: List[int]) -> List[int]:
-        nums_set = set(nums)
         res = []
 
-        for i in range(1, len(nums)+1):
-            if i not in nums_set:
-                res.append(i)
+        for num in nums:
+            i = abs(num) - 1
+            nums[i] = -1 * abs(nums[i])
+
+        for i, n in enumerate(nums):
+            if n > 0:
+                res.append(i+1)
         
         return res
