@@ -1,37 +1,36 @@
 class Solution:
     def minWindow(self, s: str, t: str) -> str:
-        if len(s)<len(t):
-            return ""
-        
         countT = {}
-        window = {}
-        l = 0
-        res = [-1,-1]
-        resLen = float("infinity")
+        countS = {}
 
         for c in t:
-            countT[c] = 1 + countT.get(c, 0)
+            countT[c] = 1+countT.get(c,0)
         
         have = 0
         need = len(countT)
-        
-        for r in range(len(s)):
-            window[s[r]] = 1 + window.get(s[r], 0)
+        l = 0
+        r = 0
+        resLen = float("infinity")
+        res = [-1,-1]
 
-            if s[r] in countT and window[s[r]] == countT[s[r]]:
+        while r<len(s):
+            countS[s[r]] = 1 + countS.get(s[r],0)
+            if countS[s[r]] == countT.get(s[r],0):
                 have+=1
-            
             while have == need:
                 if (r-l+1)<resLen:
-                    res = [l,r]
                     resLen = r-l+1
+                    res[0] = l
+                    res[1] = r
                 
-                window[s[l]] -= 1
-                if s[l] in countT and window[s[l]]<countT[s[l]]:
+                countS[s[l]]-=1
+                if countS[s[l]] == (countT.get(s[l],0)) - 1:
                     have-=1
                 l+=1
-        
-        if resLen == float("infinity"):
-            return ""
-        else:
+                
+            r+=1
+
+        if resLen != float("infinity"):
             return s[res[0]:res[1]+1]
+        else:
+            return ""
