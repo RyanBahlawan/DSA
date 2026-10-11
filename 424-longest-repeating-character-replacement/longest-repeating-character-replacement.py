@@ -1,18 +1,19 @@
 class Solution:
     def characterReplacement(self, s: str, k: int) -> int:
+        #window size - max Frequency<=k
         count = {}
-        l = 0
         maxF = 0
-        res = 0
+        l = 0
+        best = 0
 
         for r in range(len(s)):
-            count[s[r]] = 1 + count.get(s[r], 0)
-            maxF = max(maxF, count[s[r]])
+            count[s[r]] = 1 + count.get(s[r],0)
+            maxF = max(count[s[r]],maxF)
 
-            while (r-l+1) - maxF > k:
+            while (r-l+1)-maxF>k:
                 count[s[l]]-=1
                 l+=1
-            
-            res = max(r-l+1, res)
+
+            best = max(r-l+1,best)
         
-        return res
+        return best
