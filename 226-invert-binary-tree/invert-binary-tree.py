@@ -10,9 +10,14 @@ class Solution:
         if not root:
             return None
         
-        root.left, root.right = root.right, root.left
+        s = [root]
 
-        self.invertTree(root.left)
-        self.invertTree(root.right)
-
+        while s:
+            node = s.pop()
+            if node.left:
+                s.append(node.left)
+            if node.right:
+                s.append(node.right)
+            node.left, node.right = node.right, node.left
+        
         return root
