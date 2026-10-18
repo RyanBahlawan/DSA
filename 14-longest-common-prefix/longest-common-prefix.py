@@ -5,7 +5,6 @@ class Solution:
         
         total = len(strs)-1
         end = 0
-        res = []
         for i in range(len(strs[0])):
             count = 0
             for j in range(1,len(strs)):
