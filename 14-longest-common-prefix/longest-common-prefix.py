@@ -4,15 +4,16 @@ class Solution:
             return ""
         
         total = len(strs)-1
+        end = 0
         res = []
         for i in range(len(strs[0])):
             count = 0
-            for w in strs[1:]:
-                if i<=len(w)-1 and w[i] == strs[0][i]:
+            for j in range(1,len(strs)):
+                if i<=len(strs[j])-1 and strs[j][i] == strs[0][i]:
                     count +=1
             if total!=count:
                 break
             else:
-                res.append(strs[0][i])
+                end+=1
         
-        return "".join(res)
+        return strs[0][:end]
