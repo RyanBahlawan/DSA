@@ -4,9 +4,13 @@ class Solution:
         best = 0
 
         for n in hashset:
-            length = 0
-            if (n-1) not in hashset:
-                while (n+length) in hashset:
-                    length+=1
-                best = max(length, best)
+            #start of the sequence
+            if not(n-1 in hashset):
+                i = 0
+                res = 0
+                while n+i in hashset:
+                    res+=1
+                    i+=1
+                best = max(res,best)
+
         return best
