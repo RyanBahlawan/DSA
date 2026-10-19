@@ -1,18 +1,24 @@
 class Solution:
     def isValid(self, s: str) -> bool:
+        closedToOpen = {']':'[','}':'{',')':'('}
         stack = []
-        map = {']':'[', '}':'{', ')':'('}
 
         for c in s:
-            if c in map:
-                if stack and map[c] == stack[-1]:
+            #Closed
+            if c in closedToOpen:
+                #Matching open and closed
+                if stack and closedToOpen[c]==stack[-1]:
                     stack.pop()
+                
+                #not matching
                 else:
                     return False
+            
+            #Open
             else:
                 stack.append(c)
-        
-        if not stack:
-            return True
-        else:
+
+        if stack:
             return False
+        else:
+            return True
