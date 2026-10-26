@@ -1,5 +1,6 @@
 class Solution:
     def findJudge(self, n: int, trust: list[list[int]]) -> int:
+        #A town where there is only 1 person and they trust nobody
         if len(trust) == 0 and n==1:
             return n
 
