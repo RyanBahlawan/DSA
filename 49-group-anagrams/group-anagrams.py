@@ -1,11 +1,15 @@
 class Solution:
     def groupAnagrams(self, strs: list[str]) -> list[list[str]]:
-        anagrams = defaultdict(list)
+        map = defaultdict(list) #amount of characters from a-z -> word
+        res = []
 
-        for w in strs:
-            chars = [0] * 26
-            for c in w:
-                chars[ord(c)-ord('a')] += 1
-            anagrams[tuple(chars)].append(w)
+        for s in strs:
+            characters = [0]*26
+            for c in s:
+                characters[ord(c)-ord('a')]+=1
+            map[tuple(characters)].append(s)
         
-        return list(anagrams.values())
+        for key in map.keys():
+            res.append(map[key])
+        
+        return res
