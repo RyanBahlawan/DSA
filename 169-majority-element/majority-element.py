@@ -3,11 +3,11 @@ class Solution:
         res = 0
         count = 0
 
-        for n in nums:
+        for i in range(len(nums)):
             if count == 0:
-                res = n
-            
-            if n==res:
+                res = nums[i]
+
+            if res == nums[i]:
                 count+=1
             else:
                 count-=1
